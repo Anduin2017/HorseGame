@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace HorseGame.Tests
 {
     [TestClass]
-    public class UnitTests
+    public class EvaluatorTests
     {
         [TestMethod]
         public void HorseEvaluatorTest1()
