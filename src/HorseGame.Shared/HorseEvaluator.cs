@@ -23,7 +23,7 @@ namespace HorseGame.Shared
                 else
                 {
                     var remainingRoad = Consts.TotalLength - gone;
-                    var timeRequiredToFinish = remainingRoad / speed;
+                    var timeRequiredToFinish = (double)remainingRoad / speed;
                     timeElapsed += timeRequiredToFinish;
                     return timeElapsed;
                 }
