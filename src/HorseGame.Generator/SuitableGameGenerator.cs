@@ -28,8 +28,11 @@ namespace HorseGame.Generator
         private bool IsGameSuitable(Game game)
         {
             var overtakes = this.overtakeEvaluator.GetOvertakes(game).ToArray();
-            Console.WriteLine($"Overtakes: {overtakes.Count()}");
-            return overtakes.Count() > 18;
+            var manyOvertakes = overtakes.Count() > 18;
+
+            var existsOvertakesAtFinal = overtakes.Count(t => t.Level == Consts.LevelsCountInAGame - 1) > 2;
+
+            return manyOvertakes && existsOvertakesAtFinal;
         }
     }
 }

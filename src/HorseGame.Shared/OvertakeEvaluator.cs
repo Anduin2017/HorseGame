@@ -53,11 +53,11 @@ namespace HorseGame.Shared
                 slytherinScore += GetScoreBasedOnTimeChart(scores, slytherinsTime);
 
                 var newFacing = GetFacing(gryffindorScore, ravenclawScore, hufflepuffScore, slytherinScore);
-                var overtakes = GetOvertakesByLevel(previousFacing, newFacing);
                 if (game.Levels.IndexOf(level) == 0)
                 {
                     continue;
                 }
+                var overtakes = GetOvertakesByLevel(previousFacing, newFacing, game.Levels.IndexOf(level));
                 foreach (var overtake in overtakes)
                 {
                     yield return overtake;
@@ -93,7 +93,7 @@ namespace HorseGame.Shared
             return Consts.GradeScoreMatch.OrderByDescending(t => t).ToArray()[index];
         }
 
-        private List<OverTake> GetOvertakesByLevel(Facing previousFacing, Facing newFacing)
+        private List<OverTake> GetOvertakesByLevel(Facing previousFacing, Facing newFacing, int index)
         {
             var allOvertakes = new List<OverTake>();
             var gryffindorOverTakes = newFacing
@@ -102,7 +102,8 @@ namespace HorseGame.Shared
                 .Select(t => new OverTake
                 {
                     Previous = "Gryffindor",
-                    Beater = t
+                    Beater = t,
+                    Level = index
                 });
             var ravenclawOvertakes = newFacing
                 .RavenclawFacing
@@ -110,7 +111,8 @@ namespace HorseGame.Shared
                 .Select(t => new OverTake
                 {
                     Previous = "Ravenclaw",
-                    Beater = t
+                    Beater = t,
+                    Level = index
                 });
             var hufflepuffOvertakes = newFacing
                 .HufflepuffFacing
@@ -118,7 +120,8 @@ namespace HorseGame.Shared
                 .Select(t => new OverTake
                 {
                     Previous = "Hufflepuff",
-                    Beater = t
+                    Beater = t,
+                    Level = index
                 });
             var slytherinOvertakes = newFacing
                 .SlytherinFacing
@@ -126,7 +129,8 @@ namespace HorseGame.Shared
                 .Select(t => new OverTake
                 {
                     Previous = "Slytherin",
-                    Beater = t
+                    Beater = t,
+                    Level = index
                 });
             allOvertakes.AddRange(gryffindorOverTakes);
             allOvertakes.AddRange(ravenclawOvertakes);

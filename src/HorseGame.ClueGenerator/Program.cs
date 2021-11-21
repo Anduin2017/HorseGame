@@ -15,7 +15,9 @@ namespace HorseGame.ClueGenerator
             var generators = new List<IClueGenerator>();
             generators.Add(new OverTakeGenerator());
 
-            var allClues = generators.SelectMany(t => t.GetClues(game)).ToArray();
+            var allClues = generators
+                .SelectMany(t => t.GetClues(game))
+                .ToArray();
             return allClues;
         }
 
@@ -24,7 +26,13 @@ namespace HorseGame.ClueGenerator
             var game = new SuitableGameGenerator()
                 .BuildSuitable();
 
-           var clues = GetClues(game);
+            var clues = GetClues(game)
+                 .Select(t => t.Print());
+
+            foreach(var clue in clues)
+            {
+                Console.WriteLine(clue);
+            }
         }
     }
 }
