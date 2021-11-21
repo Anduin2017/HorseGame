@@ -1,4 +1,5 @@
 ﻿using HorseGame.Shared;
+using HorseGame.Shared.Clues;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,11 @@ namespace HorseGame.Tests
             // R takes G.
 
             var clues = HorseGame.ClueGenerator.Program.GetClues(game);
+            Assert.AreEqual((clues[0] as Faster)?.Fasterer, "Gryffindor");
+            Assert.AreEqual((clues[0] as Faster)?.Slower, "Ravenclaw");
+
+            Assert.AreEqual((clues[6] as Faster)?.Fasterer, "Ravenclaw");
+            Assert.AreEqual((clues[6] as Faster)?.Slower, "Slytherin");
         }
     }
 }
