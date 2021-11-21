@@ -8,8 +8,8 @@ namespace HorseGame.Shared
 {
     public class OverTake
     {
-        public string Previous { get; set; }
-        public string Beater { get; set; }
+        public string Previous { get; set; } = string.Empty;
+        public string Beater { get; set; } = string.Empty;
     }
 
     public class Facing
