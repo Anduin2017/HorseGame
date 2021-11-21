@@ -1,10 +1,5 @@
 ﻿using HorseGame.Generator;
 using HorseGame.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseGame.ClueGenerator
 {
@@ -15,6 +10,7 @@ namespace HorseGame.ClueGenerator
             var generators = new List<IClueGenerator>();
             generators.Add(new OverTakeGenerator());
             generators.Add(new FasterGenerator());
+            generators.Add(new PositioningGenerator());
 
             var allClues = generators
                 .SelectMany(t => t.GetClues(game))

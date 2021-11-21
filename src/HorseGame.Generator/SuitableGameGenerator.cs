@@ -30,9 +30,11 @@ namespace HorseGame.Generator
             var overtakes = this.overtakeEvaluator.GetOvertakes(game).ToArray();
             var manyOvertakes = overtakes.Count() > 18;
 
-            var existsOvertakesAtFinal = overtakes.Count(t => t.Level == Consts.LevelsCountInAGame - 1) > 2;
+            var interestingFinal = overtakes.Count(t => t.Level == Consts.LevelsCountInAGame - 1) > 2;
 
-            return manyOvertakes && existsOvertakesAtFinal;
+            var manyOverTakesLaterThan7 = overtakes.Count(t => t.Level > 5) > 9;
+
+            return manyOvertakes && interestingFinal && manyOverTakesLaterThan7;
         }
     }
 }
