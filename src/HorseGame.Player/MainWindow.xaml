@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HorseGame.Player"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="840">
     <Grid>
         <ComboBox HorizontalAlignment="Left" Margin="37,34,0,0" VerticalAlignment="Top" Width="326" x:Name="Levels" />
         <ProgressBar HorizontalAlignment="Left" Height="28" Margin="132,94,0,0" VerticalAlignment="Top" Width="558" x:Name="GryffindorProgress" Maximum="100" />
@@ -21,5 +21,11 @@
         <Label x:Name="HTime" Content="" HorizontalAlignment="Left" Margin="726,161,0,0" VerticalAlignment="Top"/>
         <Label x:Name="RTime" Content="" HorizontalAlignment="Left" Margin="726,230,0,0" VerticalAlignment="Top"/>
         <Label x:Name="STime" Content="" HorizontalAlignment="Left" Margin="726,305,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ResultLabel" Content="Result" HorizontalAlignment="Left" Margin="250,348,0,0" VerticalAlignment="Top" Width="213"/>
+        <Label x:Name="HelpLabel" Content="" HorizontalAlignment="Left" Margin="80,348,0,0" VerticalAlignment="Top" Width="240"/>
+        <Label x:Name="GScore" Content="0" HorizontalAlignment="Left" Margin="37,122,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="HScore" Content="0" HorizontalAlignment="Left" Margin="37,175,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="RScore" Content="0" HorizontalAlignment="Left" Margin="37,243,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="SScore" Content="0" HorizontalAlignment="Left" Margin="37,318,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

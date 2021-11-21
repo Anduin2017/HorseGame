@@ -52,7 +52,7 @@ namespace HorseGame.Shared
                 hufflepuffScore += GetScoreBasedOnTimeChart(scores, hufflepuffTime);
                 slytherinScore += GetScoreBasedOnTimeChart(scores, slytherinsTime);
 
-                var newFacing = GetFacing(gryffindorScore, ravenclawScore, hufflepuffScore, slytherinScore);
+                var newFacing = GetFacingWithoutEquals(gryffindorScore, ravenclawScore, hufflepuffScore, slytherinScore);
                 if (game.Levels.IndexOf(level) == 0)
                 {
                     continue;
@@ -66,6 +66,28 @@ namespace HorseGame.Shared
         }
 
         private Facing GetFacing(int gryffindorScore, int ravenclawScore, int hufflepuffScore, int slytherinScore)
+        {
+            var facing = new Facing();
+            if (ravenclawScore >= gryffindorScore) facing.GryffindorFacing.Add("Ravenclaw");
+            if (hufflepuffScore >= gryffindorScore) facing.GryffindorFacing.Add("Hufflepuff");
+            if (slytherinScore >= gryffindorScore) facing.GryffindorFacing.Add("Slytherin");
+
+            if (gryffindorScore >= ravenclawScore) facing.RavenclawFacing.Add("Gryffindor");
+            if (hufflepuffScore >= ravenclawScore) facing.RavenclawFacing.Add("Hufflepuff");
+            if (slytherinScore >= ravenclawScore) facing.RavenclawFacing.Add("Slytherin");
+
+            if (gryffindorScore >= hufflepuffScore) facing.HufflepuffFacing.Add("Gryffindor");
+            if (ravenclawScore >= hufflepuffScore) facing.HufflepuffFacing.Add("Ravenclaw");
+            if (slytherinScore >= hufflepuffScore) facing.HufflepuffFacing.Add("Slytherin");
+
+            if (gryffindorScore >= slytherinScore) facing.SlytherinFacing.Add("Gryffindor");
+            if (ravenclawScore >= slytherinScore) facing.SlytherinFacing.Add("Ravenclaw");
+            if (hufflepuffScore >= slytherinScore) facing.SlytherinFacing.Add("Hufflepuff");
+
+            return facing;
+        }
+
+        private Facing GetFacingWithoutEquals(int gryffindorScore, int ravenclawScore, int hufflepuffScore, int slytherinScore)
         {
             var facing = new Facing();
             if (ravenclawScore > gryffindorScore) facing.GryffindorFacing.Add("Ravenclaw");

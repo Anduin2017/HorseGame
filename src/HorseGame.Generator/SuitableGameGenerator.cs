@@ -30,9 +30,9 @@ namespace HorseGame.Generator
         private bool IsGameSuitable(Game game)
         {
             var overtakes = this.overtakeEvaluator.GetOvertakes(game).ToArray();
-            var manyOvertakes = overtakes.Count() > 18;
+            var manyOvertakes = overtakes.Count() > 13;
 
-            var interestingFinal = overtakes.Count(t => t.Level == Consts.LevelsCountInAGame - 1) > 2;
+            var interestingFinal = overtakes.Count(t => t.Level == Consts.LevelsCountInAGame - 1) > 1;
 
             var manyOverTakesLater = overtakes.Count(t => t.Level > 5) > 9;
             var notSameScoreFinally = this.SameSore(game);
