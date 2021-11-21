@@ -14,5 +14,6 @@ namespace HorseGame.Shared
         public const int HorseCount = 4;
         public const int TotalLength = 100;
         public const int LevelsCountInAGame = 10;
+        public static int[] GradeScoreMatch = new int[] { 3, 2, 1, 0 };
     }
 }

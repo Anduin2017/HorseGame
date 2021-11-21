@@ -10,7 +10,7 @@ namespace HorseGame.Tests
         public void HorseEvaluatorTest1()
         {
             var evaluator = new HorseEvaluator();
-            var result = evaluator.TimeEvaluator(new List<int>
+            var result = evaluator.EvaluatorTime(new List<int>
             {
                 20,20,20,20,20
             });
@@ -21,7 +21,7 @@ namespace HorseGame.Tests
         public void HorseEvaluatorTest2()
         {
             var evaluator = new HorseEvaluator();
-            var result = evaluator.TimeEvaluator(new List<int>
+            var result = evaluator.EvaluatorTime(new List<int>
             {
                 20,20,20,20,40
             });
@@ -32,7 +32,7 @@ namespace HorseGame.Tests
         public void HorseEvaluatorTest3()
         {
             var evaluator = new HorseEvaluator();
-            var result = evaluator.TimeEvaluator(new List<int>
+            var result = evaluator.EvaluatorTime(new List<int>
             {
                 20,20,10,10,10
             });

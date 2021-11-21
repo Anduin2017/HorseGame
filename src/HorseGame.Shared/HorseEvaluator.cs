@@ -8,7 +8,7 @@ namespace HorseGame.Shared
 {
     public class HorseEvaluator
     {
-        public double TimeEvaluator(IList<int> speeds)
+        public double EvaluatorTime(IList<int> speeds)
         {
             int gone = 0;
             double timeElapsed = 0;

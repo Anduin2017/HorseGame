@@ -22,12 +22,7 @@ namespace HorseGame.Generator
                 var candidateLevel = this.BuildALevel();
                 if (IsLevelSuitable(candidateLevel))
                 {
-                    Console.WriteLine("Level suitable. Will continue!");
                     return candidateLevel;
-                }
-                else
-                {
-                    Console.WriteLine("Level not suitable. Will retry!");
                 }
             }
         }
@@ -64,10 +59,10 @@ namespace HorseGame.Generator
         public bool IsLevelSuitable(Level level)
         {
             var evaluator = new HorseEvaluator();
-            var gryffindorTime = evaluator.TimeEvaluator(level.GryffindorSpeeds);
-            var hufflepuffTime = evaluator.TimeEvaluator(level.HufflepuffSpeeds);
-            var ravenclawTime = evaluator.TimeEvaluator(level.RavenclawSpeeds);
-            var slytherinTime = evaluator.TimeEvaluator(level.SlytherinSpeeds);
+            var gryffindorTime = evaluator.EvaluatorTime(level.GryffindorSpeeds);
+            var hufflepuffTime = evaluator.EvaluatorTime(level.HufflepuffSpeeds);
+            var ravenclawTime = evaluator.EvaluatorTime(level.RavenclawSpeeds);
+            var slytherinTime = evaluator.EvaluatorTime(level.SlytherinSpeeds);
 
             var speedUnique = gryffindorTime != hufflepuffTime &&
                 hufflepuffTime != ravenclawTime &&
