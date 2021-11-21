@@ -11,6 +11,7 @@ namespace HorseGame.ClueGenerator
             generators.Add(new OverTakeGenerator());
             generators.Add(new FasterGenerator());
             generators.Add(new PositioningGenerator());
+            generators.Add(new TotalCountGenerator());
 
             var allClues = generators
                 .SelectMany(t => t.GetClues(game))
