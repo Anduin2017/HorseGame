@@ -8,7 +8,7 @@ namespace HorseGame.Shared
 {
     public class Consts
     {
-        public static int[] PossibleSpeeds = new int[] { 20, 10, 7, 5 };
+        public static int[] PossibleSpeeds = new int[] { 40, 20, 14, 10 };
         public const int DurationForEachSpeed = 1;
         public const int SpeedStagesEachLevel = 5;
         public const int HorseCount = 4;

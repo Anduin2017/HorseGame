@@ -31,7 +31,7 @@ namespace HorseGame.Shared
 
             var remainingRoadAtLast = Consts.TotalLength - gone;
             var lastSpeed = speeds.Last();
-            var timeRequiredToFinishAtLast = remainingRoadAtLast / lastSpeed;
+            var timeRequiredToFinishAtLast = (double)remainingRoadAtLast / lastSpeed;
             timeElapsed += timeRequiredToFinishAtLast;
             return timeElapsed;
         }

@@ -64,8 +64,12 @@ namespace HorseGame.Generator
             var ravenclawTime = evaluator.EvaluatorTime(level.RavenclawSpeeds);
             var slytherinTime = evaluator.EvaluatorTime(level.SlytherinSpeeds);
 
-            var speedUnique = gryffindorTime != hufflepuffTime &&
+            var speedUnique = 
+                gryffindorTime != hufflepuffTime &&
+                gryffindorTime != ravenclawTime &&
+                gryffindorTime != slytherinTime &&
                 hufflepuffTime != ravenclawTime &&
+                hufflepuffTime != slytherinTime &&
                 ravenclawTime != slytherinTime;
 
             var speedsList = new double[]
@@ -76,8 +80,8 @@ namespace HorseGame.Generator
                 slytherinTime
             };
             var speedNear = speedsList.Max() - speedsList.Min() < 5;
-            var notSoLong = speedsList.Max() < 16;
-            var notSoFast = speedsList.Min() > 6;
+            var notSoLong = speedsList.Max() < 8;
+            var notSoFast = speedsList.Min() > 3;
 
             return speedUnique && speedNear && notSoLong && notSoFast;
         }

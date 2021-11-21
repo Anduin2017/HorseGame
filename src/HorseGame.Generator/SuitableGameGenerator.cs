@@ -68,9 +68,13 @@ namespace HorseGame.Generator
                 slytherinScore += this.overtakeEvaluator.GetScoreBasedOnTimeChart(scores, slytherinsTime);
             }
 
-            return gryffindorScore != ravenclawScore && 
-                ravenclawScore  != hufflepuffScore && 
-                hufflepuffScore != slytherinScore;
+            return 
+                gryffindorScore != ravenclawScore && 
+                gryffindorScore != hufflepuffScore && 
+                gryffindorScore != slytherinScore &&
+                hufflepuffScore != ravenclawScore &&
+                hufflepuffScore != slytherinScore &&
+                ravenclawScore  != slytherinScore;
         }
     }
 }
