@@ -87,13 +87,13 @@ namespace HorseGame.Shared
             return facing;
         }
 
-        private int GetScoreBasedOnTimeChart(double[] timeChart, double myTime)
+        public int GetScoreBasedOnTimeChart(double[] timeChart, double myTime)
         {
             var index = timeChart.ToList().IndexOf(myTime);
             return Consts.GradeScoreMatch.OrderByDescending(t => t).ToArray()[index];
         }
 
-        private List<OverTake> GetOvertakesByLevel(Facing previousFacing, Facing newFacing, int index)
+        public List<OverTake> GetOvertakesByLevel(Facing previousFacing, Facing newFacing, int index)
         {
             var allOvertakes = new List<OverTake>();
             var gryffindorOverTakes = newFacing
