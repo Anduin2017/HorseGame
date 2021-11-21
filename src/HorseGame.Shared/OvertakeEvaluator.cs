@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HorseGame.Shared.Clues;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,6 @@ using System.Threading.Tasks;
 
 namespace HorseGame.Shared
 {
-    public class OverTake
-    {
-        public string Previous { get; set; } = string.Empty;
-        public string Beater { get; set; } = string.Empty;
-    }
-
     public class Facing
     {
         public List<string> GryffindorFacing { get; set; } = new List<string>();
