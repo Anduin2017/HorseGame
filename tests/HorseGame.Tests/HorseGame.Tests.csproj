@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\HorseGame.ClueGenerator\HorseGame.ClueGenerator.csproj" />
-    <ProjectReference Include="..\..\src\HorseGame.Generator\HorseGame.Generator.csproj" />
+    
   </ItemGroup>
 
 </Project>
