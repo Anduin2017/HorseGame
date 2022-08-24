@@ -9,7 +9,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HorseGame.Generator\HorseGame.Generator.csproj" />
-		<ProjectReference Include="..\HorseGame.Shared\HorseGame.Shared.csproj" />
+		
 	</ItemGroup>
 
 </Project>
