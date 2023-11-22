@@ -1,5 +1,7 @@
 # HorseGame
 
+[![ManHours](https://manhours.aiursoft.cn/gitlab/gitlab.aiursoft.cn/anduin/horsegame)](https://gitlab.aiursoft.cn/anduin/horsegame/-/commits/master?ref_type=heads)
+
 A game for a group of people.
 
 这是一个计算机辅助的多人桌游。
