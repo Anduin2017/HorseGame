@@ -1,6 +1,6 @@
 # HorseGame
 
-[![ManHours](https://manhours.aiursoft.cn/gitlab/gitlab.aiursoft.cn/anduin/horsegame)](https://gitlab.aiursoft.cn/anduin/horsegame/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.cn/gitlab/gitlab.aiursoft.cn/anduin/horsegame.svg)](https://gitlab.aiursoft.cn/anduin/horsegame/-/commits/master?ref_type=heads)
 
 A game for a group of people.
 
