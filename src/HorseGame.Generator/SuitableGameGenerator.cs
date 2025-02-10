@@ -20,14 +20,14 @@ namespace HorseGame.Generator
             while (true)
             {
                 var newGame = this.gameGenerator.Build();
-                if (IsGameSuitable(newGame))
+                if (IsFunnyGame(newGame))
                 {
                     return newGame;
                 }
             }
         }
 
-        private bool IsGameSuitable(Game game)
+        private bool IsFunnyGame(Game game)
         {
             var overtakes = this.overtakeEvaluator.GetOvertakes(game).ToArray();
             var manyOvertakes = overtakes.Count() > 13;

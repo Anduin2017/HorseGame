@@ -8,13 +8,19 @@ namespace HorseGame.ClueGenerator
         public static IClue[] GetClues(Game game)
         {
             var generators = new List<IClueGenerator>();
+
+            // $"Horse {Beater} will surpass Horse {Previous} with total score after round {Level + 1}.";
             generators.Add(new OverTakeGenerator());
-            generators.Add(new OverTakeGenerator());
-            generators.Add(new OverTakeGenerator());
+
+            // $"Horse {Fasterer} will run faster than Horse {Slower} at round {Level + 1}.";
             generators.Add(new FasterGenerator());
             generators.Add(new FasterGenerator());
+
+            // $"Horse {HorseName} will run at the {Place}th place in the {Level + 1}th round.";
             generators.Add(new PositioningGenerator());
             generators.Add(new PositioningGenerator());
+
+            // $"Horse {HorseName} will get totally {Time} times at the {Position} place.";
             generators.Add(new TotalCountGenerator());
             generators.Add(new TotalCountGenerator());
 
