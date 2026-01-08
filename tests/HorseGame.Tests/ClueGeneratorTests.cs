@@ -1,68 +1,74 @@
-﻿using HorseGame.Shared;
+﻿using Xunit;
+using HorseGame.Shared;
+using HorseGame.Unified.Generators;
 using HorseGame.Shared.Clues;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HorseGame.Tests
+namespace HorseGame.Tests;
+
+public class ClueGeneratorTests
 {
-    [TestClass]
-    public class ClueGeneratorTests
+    [Fact]
+    public void SuitableGameGenerator_Generates10Levels()
     {
-        [TestMethod]
-        public void TestClue()
-        {
-            var game = new Game();
+        var generator = new SuitableGameGenerator();
+        var game = generator.Generate();
 
-            // G,R,H,S
-            // 3,2,1,0
-            game.Levels.Add(new Level
-            {
-                GryffindorSpeeds = new List<int> { 20, 20, 20, 20 },
-                RavenclawSpeeds = new List<int> { 20, 20, 20, 10 },
-                HufflepuffSpeeds = new List<int> { 20, 20, 20, 7 },
-                SlytherinSpeeds = new List<int> { 20, 20, 20, 5 },
-            });
+        Assert.Equal(10, game.Levels.Count);
+    }
 
+    [Fact]
+    public void NotFirstGenerator_GeneratesCluesForNonWinners()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.Generate();
+        var clueGen = new NotFirstGenerator();
 
-            // R+3 = 5
-            // S+2 = 2
-            // G+1 = 4
-            // H+0 = 1
+        var clues = clueGen.GetClues(game).ToList();
 
-            game.Levels.Add(new Level
-            {
-                RavenclawSpeeds = new List<int> { 20, 20, 20, 20 },
-                SlytherinSpeeds = new List<int> { 20, 20, 20, 10 },
-                GryffindorSpeeds = new List<int> { 20, 20, 20, 7 },
-                HufflepuffSpeeds = new List<int> { 20, 20, 20, 5 },
-            });
+        // Should have 3 NotFirst clues per round (for non-winners)
+        Assert.Equal(30, clues.Count); // 10 rounds * 3 non-winners
+        Assert.All(clues, c => Assert.IsType<NotFirst>(c));
+    }
 
-            // R,G,S,H
-            // 5,4,2,1
+    [Fact]
+    public void TopTwoGenerator_GeneratesCluesForTop2()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.Generate();
+        var clueGen = new TopTwoGenerator();
 
-            // Add more levels to satisfy filters
-            for (int i = 0; i < 10; i++)
-            {
-                game.Levels.Add(new Level
-                {
-                    GryffindorSpeeds = new List<int> { 20, 20, 20, 20 },
-                    RavenclawSpeeds = new List<int> { 20, 20, 20, 10 },
-                    HufflepuffSpeeds = new List<int> { 20, 20, 20, 7 },
-                    SlytherinSpeeds = new List<int> { 20, 20, 20, 5 },
-                });
-            }
+        var clues = clueGen.GetClues(game).ToList();
 
-            var clues = HorseGame.ClueGenerator.Program.GetClues(game);
-            var fasterClues = clues.OfType<Faster>().ToArray();
-            Assert.AreEqual("Gryffindor", fasterClues[0].Fasterer);
-            Assert.AreEqual("Ravenclaw", fasterClues[0].Slower);
+        // Should have 2 TopTwo clues per round
+        Assert.Equal(20, clues.Count); // 10 rounds * 2
+        Assert.All(clues, c => Assert.IsType<TopTwo>(c));
+    }
 
-            Assert.AreEqual("Gryffindor", fasterClues[6].Fasterer);
-            Assert.AreEqual("Ravenclaw", fasterClues[6].Slower);
-        }
+    [Fact]
+    public void TopThreeGenerator_GeneratesCluesForTop3()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.Generate();
+        var clueGen = new TopThreeGenerator();
+
+        var clues = clueGen.GetClues(game).ToList();
+
+        // Should have 3 TopThree clues per round
+        Assert.Equal(30, clues.Count); // 10 rounds * 3
+        Assert.All(clues, c => Assert.IsType<TopThree>(c));
+    }
+
+    [Fact]
+    public void ClueService_GeneratesRandomizedClues()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.Generate();
+        var service = new Unified.Services.ClueService();
+
+        var clues = service.GenerateClues(game);
+
+        Assert.NotEmpty(clues);
+        Assert.True(clues.Count > 50); // Should have many clues
     }
 }

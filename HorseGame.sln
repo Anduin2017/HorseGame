@@ -1,71 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FAD1E79C-7B11-42B9-92E6-71C158315993}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseGame.Shared", "src\HorseGame.Shared\HorseGame.Shared.csproj", "{A1B2C3D4-E5F6-4A5B-8C7D-9E0F1A2B3C4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseGame.Shared", "src\HorseGame.Shared\HorseGame.Shared.csproj", "{9B6DE188-E113-4987-9B6C-6DC4F77859EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseGame.Unified", "src\HorseGame.Unified\HorseGame.Unified.csproj", "{B2C3D4E5-F6A7-5B6C-9D8E-0F1A2B3C4D5E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DD2C784B-21A3-444E-95F9-DB4FCE78D88C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseGame.Tests", "tests\HorseGame.Tests\HorseGame.Tests.csproj", "{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseGame.Unified", "src\HorseGame.Unified\HorseGame.Unified.csproj", "{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseGame.Tests", "tests\HorseGame.Tests\HorseGame.Tests.csproj", "{C3D4E5F6-A7B8-6C7D-AE9F-1A2B3C4D5E6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Debug|x64.Build.0 = Debug|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Debug|x86.Build.0 = Debug|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Release|x64.ActiveCfg = Release|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Release|x64.Build.0 = Release|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Release|x86.ActiveCfg = Release|Any CPU
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB}.Release|x86.Build.0 = Release|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Debug|x64.Build.0 = Debug|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Debug|x86.Build.0 = Debug|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Release|x64.ActiveCfg = Release|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Release|x64.Build.0 = Release|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Release|x86.ActiveCfg = Release|Any CPU
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98}.Release|x86.Build.0 = Release|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Debug|x64.Build.0 = Debug|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Debug|x86.Build.0 = Debug|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Release|x64.ActiveCfg = Release|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Release|x64.Build.0 = Release|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Release|x86.ActiveCfg = Release|Any CPU
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910}.Release|x86.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9B6DE188-E113-4987-9B6C-6DC4F77859EB} = {FAD1E79C-7B11-42B9-92E6-71C158315993}
-		{2C3EEA75-DEA6-4FA4-8070-7B22779A9D98} = {DD2C784B-21A3-444E-95F9-DB4FCE78D88C}
-		{BF7B1619-7D01-4AEE-A4F5-B99FA6FD7910} = {FAD1E79C-7B11-42B9-92E6-71C158315993}
+		{A1B2C3D4-E5F6-4A5B-8C7D-9E0F1A2B3C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-4A5B-8C7D-9E0F1A2B3C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-4A5B-8C7D-9E0F1A2B3C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-4A5B-8C7D-9E0F1A2B3C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C3D4E5-F6A7-5B6C-9D8E-0F1A2B3C4D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C3D4E5-F6A7-5B6C-9D8E-0F1A2B3C4D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C3D4E5-F6A7-5B6C-9D8E-0F1A2B3C4D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C3D4E5-F6A7-5B6C-9D8E-0F1A2B3C4D5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D4E5F6-A7B8-6C7D-AE9F-1A2B3C4D5E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D4E5F6-A7B8-6C7D-AE9F-1A2B3C4D5E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D4E5F6-A7B8-6C7D-AE9F-1A2B3C4D5E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D4E5F6-A7B8-6C7D-AE9F-1A2B3C4D5E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
