@@ -1,6 +1,6 @@
 ﻿using HorseGame.Shared;
 
-namespace HorseGame.ClueGenerator
+namespace HorseGame.Unified.Generators
 {
     public class OverTakeGenerator : IClueGenerator
     {

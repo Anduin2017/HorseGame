@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HorseGame.ClueGenerator
+namespace HorseGame.Unified.Generators
 {
     public class TotalCountGenerator : IClueGenerator
     {

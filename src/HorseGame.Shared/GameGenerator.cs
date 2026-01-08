@@ -1,6 +1,6 @@
 ﻿using HorseGame.Shared;
 
-namespace HorseGame.Generator
+namespace HorseGame.Shared
 {
     public class GameGenerator
     {
@@ -64,7 +64,7 @@ namespace HorseGame.Generator
             var ravenclawTime = evaluator.EvaluatorTime(level.RavenclawSpeeds);
             var slytherinTime = evaluator.EvaluatorTime(level.SlytherinSpeeds);
 
-            var speedUnique = 
+            var speedUnique =
                 gryffindorTime != hufflepuffTime &&
                 gryffindorTime != ravenclawTime &&
                 gryffindorTime != slytherinTime &&

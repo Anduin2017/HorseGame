@@ -1,6 +1,6 @@
 ﻿using HorseGame.Shared;
 
-namespace HorseGame.Generator
+namespace HorseGame.Shared
 {
     public class SuitableGameGenerator
     {
@@ -68,13 +68,13 @@ namespace HorseGame.Generator
                 slytherinScore += this.overtakeEvaluator.GetScoreBasedOnTimeChart(scores, slytherinsTime);
             }
 
-            return 
-                gryffindorScore != ravenclawScore && 
-                gryffindorScore != hufflepuffScore && 
+            return
+                gryffindorScore != ravenclawScore &&
+                gryffindorScore != hufflepuffScore &&
                 gryffindorScore != slytherinScore &&
                 hufflepuffScore != ravenclawScore &&
                 hufflepuffScore != slytherinScore &&
-                ravenclawScore  != slytherinScore;
+                ravenclawScore != slytherinScore;
         }
     }
 }

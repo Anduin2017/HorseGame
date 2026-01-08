@@ -1,7 +1,7 @@
 using System;
 using Gtk;
 
-namespace HorseGame.Player
+namespace HorseGame.Unified
 {
     class Program
     {
@@ -10,10 +10,10 @@ namespace HorseGame.Player
         {
             Application.Init();
 
-            var app = new Application("org.HorseGame.Player", GLib.ApplicationFlags.None);
+            var app = new Application("org.HorseGame.Unified", GLib.ApplicationFlags.None);
             app.Register(GLib.Cancellable.Current);
 
-            var win = new MainWindow();
+            var win = new Windows.MainMenuWindow();
             app.AddWindow(win);
 
             win.ShowAll();
