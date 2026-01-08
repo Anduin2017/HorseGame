@@ -32,9 +32,18 @@ namespace HorseGame.ClueGenerator
 
         public static void Main(string[] args)
         {
-            var gameJson = File.ReadAllText(args.Any() ? args[0] : "game.json");
-            var game = System.Text.Json.JsonSerializer.Deserialize<Game>(gameJson) 
-                ?? new SuitableGameGenerator().BuildSuitable();
+            var path = args.Any() ? args[0] : "game.json";
+            Game game;
+            if (File.Exists(path))
+            {
+                var gameJson = File.ReadAllText(path);
+                game = System.Text.Json.JsonSerializer.Deserialize<Game>(gameJson)
+                    ?? new SuitableGameGenerator().BuildSuitable();
+            }
+            else
+            {
+                game = new SuitableGameGenerator().BuildSuitable();
+            }
 
             var clues = GetClues(game)
                  .Select(t => t.Print())
@@ -46,27 +55,37 @@ namespace HorseGame.ClueGenerator
             }
 
             Console.WriteLine("-----");
-            Console.WriteLine("[Press Enter to clear]");
-            Console.ReadLine();
-            Console.Clear();
+            if (!Console.IsInputRedirected)
+            {
+                Console.WriteLine("[Press Enter to clear]");
+                Console.ReadLine();
+                Console.Clear();
+            }
 
             var ran = new Random();
             clues = clues.OrderBy(t => ran.Next()).ToArray();
 
             foreach(var clue in clues)
             {
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("[Press Enter to reveal next clue]");
-                Console.WriteLine("-----------------------------------");
-                Console.ReadLine();
-                Console.Clear();
+                if (!Console.IsInputRedirected)
+                {
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("[Press Enter to reveal next clue]");
+                    Console.WriteLine("-----------------------------------");
+                    Console.ReadLine();
+                    Console.Clear();
 
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("[Confidential] " + clue);
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("[Press Enter to hide]");
-                Console.ReadLine();
-                Console.Clear();
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("[Confidential] " + clue);
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("[Press Enter to hide]");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("[Confidential] " + clue);
+                }
             }
         }
     }

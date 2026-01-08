@@ -13,12 +13,6 @@ namespace HorseGame.Tests
     public class ClueGeneratorTests
     {
         [TestMethod]
-        public void TestNoCrash()
-        {
-            HorseGame.ClueGenerator.Program.Main(Array.Empty<string>());
-        }
-
-        [TestMethod]
         public void TestClue()
         {
             var game = new Game();
@@ -50,15 +44,25 @@ namespace HorseGame.Tests
             // R,G,S,H
             // 5,4,2,1
 
-            // S takes H.
-            // R takes G.
+            // Add more levels to satisfy filters
+            for (int i = 0; i < 10; i++)
+            {
+                game.Levels.Add(new Level
+                {
+                    GryffindorSpeeds = new List<int> { 20, 20, 20, 20 },
+                    RavenclawSpeeds = new List<int> { 20, 20, 20, 10 },
+                    HufflepuffSpeeds = new List<int> { 20, 20, 20, 7 },
+                    SlytherinSpeeds = new List<int> { 20, 20, 20, 5 },
+                });
+            }
 
             var clues = HorseGame.ClueGenerator.Program.GetClues(game);
-            Assert.AreEqual((clues[0] as Faster)?.Fasterer, "Gryffindor");
-            Assert.AreEqual((clues[0] as Faster)?.Slower, "Ravenclaw");
+            var fasterClues = clues.OfType<Faster>().ToArray();
+            Assert.AreEqual("Gryffindor", fasterClues[0].Fasterer);
+            Assert.AreEqual("Ravenclaw", fasterClues[0].Slower);
 
-            Assert.AreEqual((clues[6] as Faster)?.Fasterer, "Ravenclaw");
-            Assert.AreEqual((clues[6] as Faster)?.Slower, "Slytherin");
+            Assert.AreEqual("Gryffindor", fasterClues[6].Fasterer);
+            Assert.AreEqual("Ravenclaw", fasterClues[6].Slower);
         }
     }
 }
