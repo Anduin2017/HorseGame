@@ -10,7 +10,7 @@ namespace HorseGame.Unified.Generators
             var results = evaluator.GetOvertakes(game)
                 .Where(t => t.Level > 1)
                 .Where(t => t.Level != Consts.LevelsCountInAGame - 1);
-            foreach(var result in results)
+            foreach (var result in results)
             {
                 yield return result;
             }

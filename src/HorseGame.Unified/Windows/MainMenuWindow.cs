@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Gtk;
 using HorseGame.Shared;
 using HorseGame.Unified.Services;
@@ -15,10 +13,10 @@ namespace HorseGame.Unified.Windows
         public MainMenuWindow() : base("HorseGame - Main Menu")
         {
             repository = new GameRepository();
-            
+
             SetDefaultSize(800, 600);
             SetPosition(WindowPosition.Center);
-            DeleteEvent += (o, e) => Application.Quit();
+            DeleteEvent += (_,__) => Application.Quit();
 
             var vbox = new VBox(false, 10);
             vbox.BorderWidth = 10;
@@ -31,7 +29,7 @@ namespace HorseGame.Unified.Windows
             // Games list
             var scrolledWindow = new ScrolledWindow();
             scrolledWindow.SetSizeRequest(760, 400);
-            
+
             // Create TreeView with columns: Game Name, Created At
             gamesListStore = new ListStore(typeof(string), typeof(string), typeof(string)); // GameId, Name, Created
             gamesTreeView = new TreeView(gamesListStore);
@@ -55,7 +53,7 @@ namespace HorseGame.Unified.Windows
 
             // Buttons
             var buttonBox = new HBox(true, 10);
-            
+
             var createButton = new Button("Create New Game");
             createButton.Clicked += OnCreateNewGame;
             buttonBox.PackStart(createButton, true, true, 0);
@@ -79,7 +77,7 @@ namespace HorseGame.Unified.Windows
         {
             gamesListStore.Clear();
             var games = repository.ListAllGames();
-            
+
             foreach (var game in games)
             {
                 gamesListStore.AppendValues(
@@ -96,12 +94,12 @@ namespace HorseGame.Unified.Windows
             dialog.ShowAll();
             dialog.Modal = true;
             var response = dialog.Run();
-            
+
             if (response == (int)ResponseType.Ok)
             {
                 RefreshGamesList();
             }
-            
+
             dialog.Destroy();
         }
 
@@ -112,7 +110,7 @@ namespace HorseGame.Unified.Windows
             {
                 var gameId = (string)model.GetValue(iter, 0);
                 var session = repository.LoadGameSession(gameId);
-                
+
                 if (session != null)
                 {
                     var gameWindow = new GameWindow(session, repository);
@@ -139,17 +137,17 @@ namespace HorseGame.Unified.Windows
             {
                 var gameId = (string)model.GetValue(iter, 0);
                 var gameName = (string)model.GetValue(iter, 1);
-                
+
                 var md = new MessageDialog(
                     this,
                     DialogFlags.Modal,
                     MessageType.Question,
                     ButtonsType.YesNo,
                     $"Are you sure you want to delete '{gameName}'?");
-                
+
                 var response = md.Run();
                 md.Destroy();
-                
+
                 if (response == (int)ResponseType.Yes)
                 {
                     repository.DeleteGame(gameId);

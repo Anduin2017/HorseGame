@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HorseGame.Shared;
 
 namespace HorseGame.Shared.Clues
 {
@@ -11,9 +7,9 @@ namespace HorseGame.Shared.Clues
     /// </summary>
     public class TotalCount : IClue
     {
-        public string HorseName { get; set; }
+        public required string HorseName { get; set; }
         public int Time { get; set; }
-        public string Position { get; set; }
+        public required string Position { get; set; }
 
         public string Print()
         {

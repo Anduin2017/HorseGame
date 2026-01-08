@@ -48,7 +48,6 @@ namespace HorseGame.Shared
             int slytherinScore = 0;
             foreach (var level in game.Levels)
             {
-
                 var gryffindorTime = this.horseEvaluator.EvaluatorTime(level.GryffindorSpeeds);
                 var ravenclawTime = this.horseEvaluator.EvaluatorTime(level.RavenclawSpeeds);
                 var hufflepuffTime = this.horseEvaluator.EvaluatorTime(level.HufflepuffSpeeds);

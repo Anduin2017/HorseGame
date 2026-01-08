@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using HorseGame.Shared;
 using HorseGame.Shared.Clues;
 
@@ -15,7 +12,6 @@ namespace HorseGame.Unified.Generators
         {
             var clues = new List<IClue>();
             var horseEvaluator = new HorseEvaluator();
-            var horses = new[] { "Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin" };
 
             for (int levelIndex = 0; levelIndex < game.Levels.Count; levelIndex++)
             {

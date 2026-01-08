@@ -9,7 +9,7 @@ public class EvaluatorTests
     public void HorseEvaluator_CalculatesTimeCorrectly()
     {
         var evaluator = new HorseEvaluator();
-        var speeds = new int[] { 10, 10, 10, 10, 10 };
+        var speeds = new[] { 10, 10, 10, 10, 10 };
 
         var time = evaluator.EvaluatorTime(speeds);
 

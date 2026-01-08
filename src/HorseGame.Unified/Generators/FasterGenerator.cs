@@ -1,10 +1,5 @@
 ﻿using HorseGame.Shared;
 using HorseGame.Shared.Clues;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseGame.Unified.Generators
 {
@@ -22,6 +17,7 @@ namespace HorseGame.Unified.Generators
                 .Where(t => (t as Faster)?.Level > 3)
                 .Where(t => (t as Faster)?.Level != Consts.LevelsCountInAGame - 1);
         }
+
         public IEnumerable<IClue> GetCluesWithoutLimitation(Game game)
         {
             var horseEvaluator = new HorseEvaluator();

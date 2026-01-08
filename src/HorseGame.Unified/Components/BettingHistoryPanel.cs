@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Gtk;
 using HorseGame.Shared;
 
@@ -23,13 +20,13 @@ namespace HorseGame.Unified.Components
 
             // TreeView with scrolling
             var scrolled = new ScrolledWindow();
-            
+
             // ListStore: Player name + 10 round columns
             bettingListStore = new ListStore(
                 typeof(string), typeof(string), typeof(string), typeof(string), typeof(string),
                 typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string)
             );
-            
+
             bettingTreeView = new TreeView(bettingListStore);
 
             // Player column

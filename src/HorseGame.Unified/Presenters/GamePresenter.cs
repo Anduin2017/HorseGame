@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using HorseGame.Shared;
 using HorseGame.Unified.Services;
 
@@ -54,7 +50,7 @@ namespace HorseGame.Unified.Presenters
 
             session.Players.Add(new Player { PlayerName = playerName });
             session.PlayerBets[playerName] = new List<Bet>();
-            
+
             repository.SaveGameSession(session);
             PlayersChanged?.Invoke();
             BetsChanged?.Invoke();
@@ -68,7 +64,7 @@ namespace HorseGame.Unified.Presenters
 
             session.Players.Remove(player);
             session.PlayerBets.Remove(playerName);
-            
+
             repository.SaveGameSession(session);
             PlayersChanged?.Invoke();
             BetsChanged?.Invoke();
@@ -82,7 +78,8 @@ namespace HorseGame.Unified.Presenters
 
             var balance = CalculatePlayerBalance(playerName);
             if (balance < 2)
-                throw new InvalidOperationException($"{playerName} doesn't have enough balance! Current: {balance:F1}元");
+                throw new InvalidOperationException(
+                    $"{playerName} doesn't have enough balance! Current: {balance:F1}元");
 
             var availableClues = Enumerable.Range(0, session.Game.Clues.Count)
                 .Where(i => !player.PurchasedClueIndices.Contains(i))
@@ -153,13 +150,15 @@ namespace HorseGame.Unified.Presenters
             {
                 var existingBet = session.PlayerBets[playerName].FirstOrDefault(b => b.RoundNumber == roundNumber);
                 if (existingBet != null)
-                    throw new InvalidOperationException($"{playerName} has already placed a bet for Round {roundNumber}!");
+                    throw new InvalidOperationException(
+                        $"{playerName} has already placed a bet for Round {roundNumber}!");
             }
 
             // Check balance
             var balance = CalculatePlayerBalance(playerName);
             if (balance < amount)
-                throw new InvalidOperationException($"{playerName} doesn't have enough balance! Current: {balance:F1}元, Bet: {amount}元");
+                throw new InvalidOperationException(
+                    $"{playerName} doesn't have enough balance! Current: {balance:F1}元, Bet: {amount}元");
 
             // Create bet
             var bet = new Bet
@@ -173,7 +172,7 @@ namespace HorseGame.Unified.Presenters
 
             session.PlayerBets[playerName].Add(bet);
             repository.SaveGameSession(session);
-            
+
             BetsChanged?.Invoke();
             PlayersChanged?.Invoke();
         }
@@ -221,6 +220,7 @@ namespace HorseGame.Unified.Presenters
                 if (progress["Ravenclaw"] >= 1 && !scores.Contains("Ravenclaw")) scores.Add("Ravenclaw");
                 if (progress["Slytherin"] >= 1 && !scores.Contains("Slytherin")) scores.Add("Slytherin");
             }
+
             stopWatch.Stop();
 
             // Calculate times
@@ -274,16 +274,25 @@ namespace HorseGame.Unified.Presenters
                     horseEvaluator.EvaluatorTime(level.SlytherinSpeeds)
                 }.OrderBy(t => t).ToArray();
 
-                scores["Gryffindor"] += overtakeEvaluator.GetScoreBasedOnTimeChart(times, horseEvaluator.EvaluatorTime(level.GryffindorSpeeds));
-                scores["Hufflepuff"] += overtakeEvaluator.GetScoreBasedOnTimeChart(times, horseEvaluator.EvaluatorTime(level.HufflepuffSpeeds));
-                scores["Ravenclaw"] += overtakeEvaluator.GetScoreBasedOnTimeChart(times, horseEvaluator.EvaluatorTime(level.RavenclawSpeeds));
-                scores["Slytherin"] += overtakeEvaluator.GetScoreBasedOnTimeChart(times, horseEvaluator.EvaluatorTime(level.SlytherinSpeeds));
+                scores["Gryffindor"] +=
+                    overtakeEvaluator.GetScoreBasedOnTimeChart(times,
+                        horseEvaluator.EvaluatorTime(level.GryffindorSpeeds));
+                scores["Hufflepuff"] +=
+                    overtakeEvaluator.GetScoreBasedOnTimeChart(times,
+                        horseEvaluator.EvaluatorTime(level.HufflepuffSpeeds));
+                scores["Ravenclaw"] +=
+                    overtakeEvaluator.GetScoreBasedOnTimeChart(times,
+                        horseEvaluator.EvaluatorTime(level.RavenclawSpeeds));
+                scores["Slytherin"] +=
+                    overtakeEvaluator.GetScoreBasedOnTimeChart(times,
+                        horseEvaluator.EvaluatorTime(level.SlytherinSpeeds));
             }
 
             return scores;
         }
 
-        private void ProcessBettingPayouts(int roundIndex, List<string> racePositions, Dictionary<string, int> cumulativeScores)
+        private void ProcessBettingPayouts(int roundIndex, List<string> racePositions,
+            Dictionary<string, int> cumulativeScores)
         {
             var roundNumber = roundIndex + 1;
             Dictionary<string, int> horsePositions;

@@ -1,10 +1,5 @@
 ﻿using HorseGame.Shared;
 using HorseGame.Shared.Clues;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseGame.Unified.Generators
 {
@@ -49,7 +44,7 @@ namespace HorseGame.Unified.Generators
                 fourths.Add(positions[3].HorseName);
             }
 
-            var horseNames = new string[]
+            var horseNames = new[]
             {
                 "Gryffindor",
                 "Ravenclaw",
@@ -57,7 +52,7 @@ namespace HorseGame.Unified.Generators
                 "Slytherin"
             };
 
-            foreach(var horseName in horseNames)
+            foreach (var horseName in horseNames)
             {
                 yield return new TotalCount
                 {

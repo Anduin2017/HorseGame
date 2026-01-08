@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseGame.Shared.Clues
 {
@@ -12,10 +8,12 @@ namespace HorseGame.Shared.Clues
     public class Positioning : IClue
     {
         public string HorseName { get; set; } = string.Empty;
+
         /// <summary>
         /// Starts from 0.
         /// </summary>
         public int Level { get; set; }
+
         /// <summary>
         /// 1,2,3,4
         /// </summary>

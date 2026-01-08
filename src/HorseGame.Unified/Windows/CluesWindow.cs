@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using Gtk;
 using HorseGame.Shared;
 
@@ -35,7 +33,7 @@ namespace HorseGame.Unified.Windows
 
             // Close button
             var closeButton = new Button("Close");
-            closeButton.Clicked += (s, e) => this.Destroy();
+            closeButton.Clicked += (_,__) => this.Destroy();
             vbox.PackStart(closeButton, false, false, 0);
 
             Add(vbox);

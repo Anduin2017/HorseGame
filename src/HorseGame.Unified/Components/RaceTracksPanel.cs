@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Gtk;
 
 namespace HorseGame.Unified.Components
@@ -63,6 +62,7 @@ namespace HorseGame.Unified.Components
             {
                 progress.Fraction = 0;
             }
+
             foreach (var timeLabel in timeLabels.Values)
             {
                 timeLabel.Text = "";

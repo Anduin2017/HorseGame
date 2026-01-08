@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using HorseGame.Shared;
 using HorseGame.Shared.Clues;
 
@@ -18,7 +16,7 @@ namespace HorseGame.Unified.Generators
             for (int levelIndex = 0; levelIndex < game.Levels.Count; levelIndex++)
             {
                 var level = game.Levels[levelIndex];
-                
+
                 // Calculate times and rankings
                 var times = new Dictionary<string, double>
                 {

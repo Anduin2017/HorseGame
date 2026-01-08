@@ -14,16 +14,19 @@
         {
             if (elapsed >= 0 && elapsed < 1)
             {
-                return elapsed  * speeds[0];
+                return elapsed * speeds[0];
             }
+
             if (elapsed >= 1 && elapsed < 2)
             {
                 return speeds[0] + (elapsed - 1) * speeds[1];
             }
+
             if (elapsed >= 2 && elapsed < 3)
             {
                 return speeds[0] + speeds[1] + (elapsed - 2) * speeds[2];
             }
+
             if (elapsed >= 3 && elapsed < 4)
             {
                 return speeds[0] + speeds[1] + speeds[2] + (elapsed - 3) * speeds[3];

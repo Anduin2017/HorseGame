@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Gtk;
 using HorseGame.Shared;
 
@@ -48,7 +46,7 @@ namespace HorseGame.Unified.Components
             // TreeView
             var scrolled = new ScrolledWindow();
             scrolled.SetSizeRequest(-1, 200);
-            
+
             playersListStore = new ListStore(typeof(string), typeof(string), typeof(string));
             playersTreeView = new TreeView(playersListStore);
             playersTreeView.Selection.Changed += OnSelectionChanged;

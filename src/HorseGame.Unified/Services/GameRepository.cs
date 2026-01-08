@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using HorseGame.Shared;
 
@@ -15,7 +12,7 @@ namespace HorseGame.Unified.Services
         {
             var homeDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             gamesDirectory = Path.Combine(homeDir, ".horsegame", "games");
-            
+
             if (!Directory.Exists(gamesDirectory))
             {
                 Directory.CreateDirectory(gamesDirectory);
@@ -25,9 +22,9 @@ namespace HorseGame.Unified.Services
         public void SaveGameSession(GameSession session)
         {
             var filePath = Path.Combine(gamesDirectory, $"{session.Game.GameId}.json");
-            var json = JsonSerializer.Serialize(session, new JsonSerializerOptions 
-            { 
-                WriteIndented = true 
+            var json = JsonSerializer.Serialize(session, new JsonSerializerOptions
+            {
+                WriteIndented = true
             });
             File.WriteAllText(filePath, json);
         }
@@ -45,7 +42,7 @@ namespace HorseGame.Unified.Services
         public List<Game> ListAllGames()
         {
             var games = new List<Game>();
-            
+
             if (!Directory.Exists(gamesDirectory))
                 return games;
 

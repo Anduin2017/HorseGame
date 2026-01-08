@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseGame.Shared
 {
@@ -11,7 +6,7 @@ namespace HorseGame.Shared
         public Game Game { get; set; } = new Game();
         public List<Player> Players { get; set; } = new List<Player>();
         public Dictionary<string, List<Bet>> PlayerBets { get; set; } = new Dictionary<string, List<Bet>>();
-        public int CurrentRound { get; set; } = 0;
+        public int CurrentRound { get; set; }
 
         /// <summary>
         /// Calculate player balance after a specific round
@@ -57,10 +52,10 @@ namespace HorseGame.Shared
                 // Regular rounds (1-9)
                 return horsePosition switch
                 {
-                    1 => betAmount * 3,  // Champion: 3x
-                    2 => betAmount,      // Runner-up: 1x
+                    1 => betAmount * 3, // Champion: 3x
+                    2 => betAmount, // Runner-up: 1x
                     3 => betAmount * 0.5m, // Third: 0.5x
-                    _ => 0               // Fourth: 0
+                    _ => 0 // Fourth: 0
                 };
             }
             else

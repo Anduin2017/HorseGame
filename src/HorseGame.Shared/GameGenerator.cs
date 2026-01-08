@@ -12,6 +12,7 @@ namespace HorseGame.Shared
                 var level = this.BuildASuitableLevel();
                 game.Levels.Add(level);
             }
+
             return game;
         }
 
@@ -31,10 +32,14 @@ namespace HorseGame.Shared
         {
             var level = new Level();
             var randomSpeeds = GetRandomSpeeds();
-            level.GryffindorSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 0).Take(Consts.SpeedStagesEachLevel).ToList();
-            level.HufflepuffSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 1).Take(Consts.SpeedStagesEachLevel).ToList();
-            level.RavenclawSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 2).Take(Consts.SpeedStagesEachLevel).ToList();
-            level.SlytherinSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 3).Take(Consts.SpeedStagesEachLevel).ToList();
+            level.GryffindorSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 0)
+                .Take(Consts.SpeedStagesEachLevel).ToList();
+            level.HufflepuffSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 1)
+                .Take(Consts.SpeedStagesEachLevel).ToList();
+            level.RavenclawSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 2).Take(Consts.SpeedStagesEachLevel)
+                .ToList();
+            level.SlytherinSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 3).Take(Consts.SpeedStagesEachLevel)
+                .ToList();
             return level;
         }
 
@@ -72,7 +77,7 @@ namespace HorseGame.Shared
                 hufflepuffTime != slytherinTime &&
                 ravenclawTime != slytherinTime;
 
-            var speedsList = new double[]
+            var speedsList = new[]
             {
                 gryffindorTime,
                 hufflepuffTime,

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Gtk;
 using HorseGame.Shared;
 using HorseGame.Unified.Components;
@@ -18,12 +15,12 @@ namespace HorseGame.Unified.Windows
         private readonly GameRepository repository;
 
         // UI Components
-        private PlayerManagementPanel playerPanel;
-        private BettingHistoryPanel historyPanel;
-        private BettingFormPanel bettingPanel;
-        private RaceControlPanel controlPanel;
-        private RaceTracksPanel tracksPanel;
-        private ResultsPanel resultsPanel;
+        private PlayerManagementPanel playerPanel = null!;
+        private BettingHistoryPanel historyPanel = null!;
+        private BettingFormPanel bettingPanel = null!;
+        private RaceControlPanel controlPanel = null!;
+        private RaceTracksPanel tracksPanel = null!;
+        private ResultsPanel resultsPanel = null!;
 
         public GameWindow(GameSession session, GameRepository repository)
             : base($"HorseGame - {session.Game.GameName}")

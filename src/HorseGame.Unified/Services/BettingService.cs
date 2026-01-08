@@ -1,4 +1,3 @@
-using System;
 using HorseGame.Shared;
 
 namespace HorseGame.Unified.Services
@@ -22,10 +21,10 @@ namespace HorseGame.Unified.Services
                 // Rounds 1-9: Based on race position
                 return position switch
                 {
-                    1 => betAmount * 3,      // Champion: 3x
-                    2 => betAmount,          // Runner-up: 1x (return bet)
-                    3 => betAmount * 0.5m,   // Third: 0.5x
-                    _ => 0                   // Fourth: nothing
+                    1 => betAmount * 3, // Champion: 3x
+                    2 => betAmount, // Runner-up: 1x (return bet)
+                    3 => betAmount * 0.5m, // Third: 0.5x
+                    _ => 0 // Fourth: nothing
                 };
             }
             else
@@ -59,6 +58,7 @@ namespace HorseGame.Unified.Services
             {
                 total += r;
             }
+
             return total;
         }
     }

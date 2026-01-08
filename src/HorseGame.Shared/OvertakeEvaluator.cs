@@ -1,9 +1,4 @@
 ﻿using HorseGame.Shared.Clues;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseGame.Shared
 {
@@ -52,11 +47,13 @@ namespace HorseGame.Shared
                 hufflepuffScore += GetScoreBasedOnTimeChart(scores, hufflepuffTime);
                 slytherinScore += GetScoreBasedOnTimeChart(scores, slytherinsTime);
 
-                var newFacing = GetFacingWithoutEquals(gryffindorScore, ravenclawScore, hufflepuffScore, slytherinScore);
+                var newFacing =
+                    GetFacingWithoutEquals(gryffindorScore, ravenclawScore, hufflepuffScore, slytherinScore);
                 if (game.Levels.IndexOf(level) == 0)
                 {
                     continue;
                 }
+
                 var overtakes = GetOvertakesByLevel(previousFacing, newFacing, game.Levels.IndexOf(level));
                 foreach (var overtake in overtakes)
                 {
@@ -87,7 +84,8 @@ namespace HorseGame.Shared
             return facing;
         }
 
-        private Facing GetFacingWithoutEquals(int gryffindorScore, int ravenclawScore, int hufflepuffScore, int slytherinScore)
+        private Facing GetFacingWithoutEquals(int gryffindorScore, int ravenclawScore, int hufflepuffScore,
+            int slytherinScore)
         {
             var facing = new Facing();
             if (ravenclawScore > gryffindorScore) facing.GryffindorFacing.Add("Ravenclaw");

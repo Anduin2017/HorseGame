@@ -1,13 +1,8 @@
 ﻿using HorseGame.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseGame.Unified.Generators
 {
-    public interface IClueGenerator 
+    public interface IClueGenerator
     {
         IEnumerable<IClue> GetClues(Game game);
     }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using HorseGame.Shared;
 using HorseGame.Unified.Generators;
 
@@ -47,7 +44,7 @@ namespace HorseGame.Unified.Services
 
             // Randomize clues
             var random = new Random();
-            return allClues.OrderBy(t => random.Next()).ToList();
+            return allClues.OrderBy(_ => random.Next()).ToList();
         }
     }
 }

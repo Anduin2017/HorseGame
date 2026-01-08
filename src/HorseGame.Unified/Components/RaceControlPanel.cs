@@ -1,4 +1,3 @@
-using System;
 using Gtk;
 
 namespace HorseGame.Unified.Components
@@ -23,6 +22,7 @@ namespace HorseGame.Unified.Components
             {
                 roundCombo.AppendText($"Round {i + 1}");
             }
+
             roundCombo.Active = 0;
             roundCombo.Sensitive = false; // Prevent manual switching
 
@@ -31,12 +31,12 @@ namespace HorseGame.Unified.Components
 
             // Play button
             playButton = new Button("▶ Play Race");
-            playButton.Clicked += (s, e) => PlayRequested?.Invoke();
+            playButton.Clicked += (_,__) => PlayRequested?.Invoke();
             PackStart(playButton, false, false, 0);
 
             // View Clues button
             var viewCluesButton = new Button("📋 View Clues");
-            viewCluesButton.Clicked += (s, e) => ViewCluesRequested?.Invoke();
+            viewCluesButton.Clicked += (_ ,__) => ViewCluesRequested?.Invoke();
             PackEnd(viewCluesButton, false, false, 0);
         }
 

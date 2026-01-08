@@ -1,4 +1,3 @@
-using System;
 using Gtk;
 using HorseGame.Shared;
 using HorseGame.Unified.Services;
@@ -10,10 +9,11 @@ namespace HorseGame.Unified.Windows
         private readonly GameRepository repository;
         private Entry gameNameEntry;
 
-        public NewGameDialog(Window parent, GameRepository repository) : base("Create New Game", parent, DialogFlags.Modal)
+        public NewGameDialog(Window parent, GameRepository repository) : base("Create New Game", parent,
+            DialogFlags.Modal)
         {
             this.repository = repository;
-            
+
             SetDefaultSize(400, 150);
             SetPosition(WindowPosition.CenterOnParent);
 
@@ -26,7 +26,7 @@ namespace HorseGame.Unified.Windows
 
             gameNameEntry = new Entry();
             gameNameEntry.Text = $"Game {DateTime.Now:yyyy-MM-dd HH:mm}";
-            gameNameEntry.Activated += (s, e) => OnGenerate();
+            gameNameEntry.Activated += (_,__) => OnGenerate();
             contentArea.PackStart(gameNameEntry, false, false, 0);
 
             AddButton("Cancel", ResponseType.Cancel);
