@@ -23,21 +23,23 @@ namespace HorseGame.Shared
 
             decimal balance = player.InitialBalance;
 
-            if (!PlayerBets.ContainsKey(playerName))
-                return balance;
-
-            var bets = PlayerBets[playerName].Where(b => b.RoundNumber <= round).OrderBy(b => b.RoundNumber);
-
-            foreach (var bet in bets)
+            // Add income for each round (1元 for round 1, 2元 for round 2, etc.)
+            for (int r = 1; r <= round; r++)
             {
-                // Add money at the start of each round (based on README rules)
-                balance += bet.RoundNumber; // Round 1 adds 1, Round 2 adds 2, etc.
+                balance += r;
+            }
 
-                // Deduct bet amount
-                balance -= bet.BetAmount;
+            // Deduct clue purchases
+            balance -= player.PurchasedClueIndices.Count * 2;
 
-                // Add payout
-                balance += bet.Payout;
+            // Calculate betting results
+            if (PlayerBets.ContainsKey(playerName))
+            {
+                foreach (var bet in PlayerBets[playerName].Where(b => b.RoundNumber <= round))
+                {
+                    balance -= bet.BetAmount;
+                    balance += bet.Payout;
+                }
             }
 
             return balance;
@@ -63,7 +65,7 @@ namespace HorseGame.Shared
             }
             else
             {
-                // Round 10: Based on total score
+                // Round 10: Based on total score  
                 return horsePosition switch
                 {
                     1 => betAmount * 3,

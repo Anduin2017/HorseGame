@@ -48,7 +48,6 @@ namespace HorseGame.Unified.Windows
         private Label rScore;
         private Label sScore;
         private Label resultLabel;
-        private TextView cluesTextView;
 
         public GameWindow(GameSession session, GameRepository repository) : base($"HorseGame - {session.Game.GameName}")
         {
@@ -58,7 +57,7 @@ namespace HorseGame.Unified.Windows
             this.overtakeEvaluator = new OvertakeEvaluator();
             this.measurer = new ProgressMadeMeasurer();
 
-            SetDefaultSize(1500, 850);
+            SetDefaultSize(1800, 1000);
             SetPosition(WindowPosition.Center);
             DeleteEvent += OnWindowDelete;
 
@@ -67,7 +66,7 @@ namespace HorseGame.Unified.Windows
 
             // Left Panel - Player Management 
             var leftVBox = new VBox(false, 10);
-            leftVBox.SetSizeRequest(500, -1);
+            leftVBox.SetSizeRequest(650, -1);
 
             var playerLabel = new Label();
             playerLabel.Markup = "<b>Player Management</b>";
@@ -91,7 +90,7 @@ namespace HorseGame.Unified.Windows
 
             // Players TreeView (showing player, balance, purchased clues count)
             var scrolled = new ScrolledWindow();
-            scrolled.SetSizeRequest(-1, 200);
+            scrolled.SetSizeRequest(-1, 180);
             playersListStore = new ListStore(typeof(string), typeof(string), typeof(string)); // Name, Balance, Clues
             playersTreeView = new TreeView(playersListStore);
 
@@ -130,7 +129,7 @@ namespace HorseGame.Unified.Windows
             leftVBox.PackStart(bettingStatusLabel, false, false, 10);
 
             var bettingScrolled = new ScrolledWindow();
-            bettingScrolled.SetSizeRequest(-1, 150);
+            bettingScrolled.SetSizeRequest(-1, 200);
             // ListStore: Player name + 10 round bet info (string for each round)
             bettingStatusListStore = new ListStore(typeof(string), typeof(string), typeof(string), typeof(string),
                 typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string));
@@ -150,7 +149,7 @@ namespace HorseGame.Unified.Windows
                 var roundCol = new TreeViewColumn();
                 roundCol.Title = $"R{i + 1}";
                 var roundCell = new CellRendererText();
-                roundCell.WrapWidth = 60;
+                roundCell.WrapWidth = 80;
                 roundCell.WrapMode = Pango.WrapMode.Word;
                 roundCol.PackStart(roundCell, true);
                 roundCol.AddAttribute(roundCell, "text", i + 1);
@@ -196,18 +195,10 @@ namespace HorseGame.Unified.Windows
             placeBetButton.Clicked += OnPlaceBet;
             leftVBox.PackStart(placeBetButton, false, false, 0);
 
-            // Clues section
-            var cluesLabel = new Label();
-            cluesLabel.Markup = "<b>All Clues</b>";
-            leftVBox.PackStart(cluesLabel, false, false, 10);
-
-            var cluesScrolled = new ScrolledWindow();
-            cluesScrolled.SetSizeRequest(-1, 150);
-            cluesTextView = new TextView();
-            cluesTextView.Editable = false;
-            cluesTextView.WrapMode = WrapMode.Word;
-            cluesScrolled.Add(cluesTextView);
-            leftVBox.PackStart(cluesScrolled, true, true, 0);
+            // View Clues Button (opens separate window)
+            var viewCluesButton = new Button("📋 View All Clues");
+            viewCluesButton.Clicked += OnViewClues;
+            leftVBox.PackStart(viewCluesButton, false, false, 10);
 
             mainHBox.PackStart(leftVBox, false, false, 0);
 
@@ -226,7 +217,7 @@ namespace HorseGame.Unified.Windows
                 roundsCombo.AppendText($"Round {i + 1}");
             }
             roundsCombo.Active = session.CurrentRound;
-            roundsCombo.Changed += OnRoundChanged;
+            roundsCombo.Sensitive = false; // DISABLE - prevent user from switching rounds manually
             controlBox.PackStart(new Label("Current Round:"), false, false, 0);
             controlBox.PackStart(roundsCombo, true, true, 0);
 
@@ -272,7 +263,7 @@ namespace HorseGame.Unified.Windows
             hbox.PackStart(nameLabel, false, false, 0);
 
             progress = new ProgressBar();
-            progress.SetSizeRequest(400, 30);
+            progress.SetSizeRequest(500, 35);
             hbox.PackStart(progress, true, true, 0);
 
             timeLabel = new Label("");
@@ -280,7 +271,8 @@ namespace HorseGame.Unified.Windows
             hbox.PackStart(timeLabel, false, false, 0);
 
             scoreLabel = new Label("0");
-            scoreLabel.SetSizeRequest(40, -1);
+            scoreLabel.SetSizeRequest(60, -1);
+            scoreLabel.Markup = "<span size='18000' weight='bold'>0</span>";
             hbox.PackStart(scoreLabel, false, false, 0);
 
             container.PackStart(hbox, false, false, 0);
@@ -288,13 +280,47 @@ namespace HorseGame.Unified.Windows
 
         private void LoadClues()
         {
-            var cluesText = string.Join("\n\n", session.Game.Clues.Select((c, i) => $"{i + 1}. {c}"));
-            cluesTextView.Buffer.Text = cluesText;
+            // Clues stored in session.Game.Clues, accessed via View Clues button
+        }
+
+        private void OnViewClues(object? sender, EventArgs e)
+        {
+            var cluesWindow = new Window("All Clues");
+            cluesWindow.SetDefaultSize(800, 600);
+            cluesWindow.SetPosition(WindowPosition.Center);
+
+            var vbox = new VBox(false, 10);
+            vbox.BorderWidth = 15;
+
+            var titleLabel = new Label();
+            titleLabel.Markup = "<span size='16000' weight='bold'>📋 All Generated Clues</span>";
+            vbox.PackStart(titleLabel, false, false, 0);
+
+            var scrolled = new ScrolledWindow();
+            var textView = new TextView();
+            textView.Editable = false;
+            textView.WrapMode = WrapMode.Word;
+            textView.Buffer.Text = string.Join("\n\n", session.Game.Clues.Select((c, i) => $"{i + 1}. {c}"));
+            scrolled.Add(textView);
+            vbox.PackStart(scrolled, true, true, 0);
+
+            var closeButton = new Button("Close");
+            closeButton.Clicked += (s, ev) => cluesWindow.Destroy();
+            vbox.PackStart(closeButton, false, false, 0);
+
+            cluesWindow.Add(vbox);
+            cluesWindow.ShowAll();
         }
 
         private decimal CalculatePlayerCurrentBalance(Player player)
         {
             decimal balance = player.InitialBalance;
+
+            // Add income for each completed round (1元 for round 1, 2元 for round 2, etc.)
+            for (int r = 1; r <= session.CurrentRound + 1; r++)
+            {
+                balance += r;
+            }
 
             // Deduct clue purchases 
             balance -= player.PurchasedClueIndices.Count * 2;
@@ -477,21 +503,6 @@ namespace HorseGame.Unified.Windows
             repository.SaveGameSession(session);
         }
 
-        private void OnRoundChanged(object? sender, EventArgs e)
-        {
-            // Enforce sequential round play - can't skip ahead
-            var selectedRound = roundsCombo.Active;
-            if (selectedRound > session.CurrentRound)
-            {
-                var md = new MessageDialog(this, DialogFlags.Modal, MessageType.Warning, ButtonsType.Ok,
-                    $"You must play rounds in order! Please play Round {session.CurrentRound + 1} first.");
-                md.Run();
-                md.Destroy();
-                roundsCombo.Active = session.CurrentRound;
-            }
-            UpdateCurrentRoundLabel();
-        }
-
         private void UpdateCurrentRoundLabel()
         {
             currentRoundLabel.Markup = $"<i>Betting for Round {session.CurrentRound + 1}</i>";
@@ -616,43 +627,34 @@ namespace HorseGame.Unified.Windows
                 {
                     scores.Add("Slytherin");
                 }
+                // Simple text update during animation
                 resultLabel.Text = string.Join('\n', scores);
             }
             stopWatch.Stop();
+
+            // Beautify result display AFTER race completes
+            var medals = new[] { "🏆", "🥈", "🥉", "4th" };
+            var formattedResults = new List<string>();
+            for (int i = 0; i < scores.Count; i++)
+            {
+                formattedResults.Add($"{medals[i]} {scores[i]}");
+            }
+            resultLabel.Markup = $"<span size='14000' weight='bold'>\n{string.Join("\n", formattedResults)}</span>";
 
             gTime.Text = horseEvaluator.EvaluatorTime(level.GryffindorSpeeds).ToString("F2");
             hTime.Text = horseEvaluator.EvaluatorTime(level.HufflepuffSpeeds).ToString("F2");
             rTime.Text = horseEvaluator.EvaluatorTime(level.RavenclawSpeeds).ToString("F2");
             sTime.Text = horseEvaluator.EvaluatorTime(level.SlytherinSpeeds).ToString("F2");
 
-            // Calculate betting payouts for this round
-            var roundNumber = selectedIndex + 1;
-            var horsePositions = new Dictionary<string, int>
-            {
-                ["Gryffindor"] = scores.IndexOf("Gryffindor") + 1,
-                ["Hufflepuff"] = scores.IndexOf("Hufflepuff") + 1,
-                ["Ravenclaw"] = scores.IndexOf("Ravenclaw") + 1,
-                ["Slytherin"] = scores.IndexOf("Slytherin") + 1
-            };
-
-            foreach (var playerBets in session.PlayerBets.Values)
-            {
-                var bet = playerBets.FirstOrDefault(b => b.RoundNumber == roundNumber && b.Payout == 0);
-                if (bet != null && horsePositions.ContainsKey(bet.HorseName))
-                {
-                    var position = horsePositions[bet.HorseName];
-                    bet.Payout = session.CalculatePayout(bet.BetAmount, position, roundNumber);
-                }
-            }
-
-            // Calculate cumulative scores
+            // Calculate cumulative scores FIRST (needed for round 10 logic)
             int gryffindorScore = 0;
             int ravenclawScore = 0;
             int hufflepuffScore = 0;
             int slytherinScore = 0;
 
-            foreach (var previousLevel in session.Game.Levels)
+            for (int i = 0; i <= selectedIndex; i++)
             {
+                var previousLevel = session.Game.Levels[i];
                 var gryffindorTime = horseEvaluator.EvaluatorTime(previousLevel.GryffindorSpeeds);
                 var ravenclawTime = horseEvaluator.EvaluatorTime(previousLevel.RavenclawSpeeds);
                 var hufflepuffTime = horseEvaluator.EvaluatorTime(previousLevel.HufflepuffSpeeds);
@@ -670,15 +672,53 @@ namespace HorseGame.Unified.Windows
                 ravenclawScore += overtakeEvaluator.GetScoreBasedOnTimeChart(scoresList, ravenclawTime);
                 hufflepuffScore += overtakeEvaluator.GetScoreBasedOnTimeChart(scoresList, hufflepuffTime);
                 slytherinScore += overtakeEvaluator.GetScoreBasedOnTimeChart(scoresList, slytherinTime);
+            }
 
-                gScore.Text = gryffindorScore.ToString();
-                rScore.Text = ravenclawScore.ToString();
-                hScore.Text = hufflepuffScore.ToString();
-                sScore.Text = slytherinScore.ToString();
+            gScore.Markup = $"<span size='18000' weight='bold'>{gryffindorScore}</span>";
+            rScore.Markup = $"<span size='18000' weight='bold'>{ravenclawScore}</span>";
+            hScore.Markup = $"<span size='18000' weight='bold'>{hufflepuffScore}</span>";
+            sScore.Markup = $"<span size='18000' weight='bold'>{slytherinScore}</span>";
 
-                if (previousLevel == level)
+            // Calculate betting payouts - DIFFERENT logic for round 10
+            var roundNumber = selectedIndex + 1;
+            Dictionary<string, int> horsePositions;
+
+            if (roundNumber == 10)
+            {
+                // Round 10: Use TOTAL SCORE ranking instead of race position
+                var scoreRanking = new List<(string Horse, int Score)>
                 {
-                    break;
+                    ("Gryffindor", gryffindorScore),
+                    ("Hufflepuff", hufflepuffScore),
+                    ("Ravenclaw", ravenclawScore),
+                    ("Slytherin", slytherinScore)
+                }.OrderByDescending(x => x.Score).ToList();
+
+                horsePositions = new Dictionary<string, int>();
+                for (int i = 0; i < scoreRanking.Count; i++)
+                {
+                    horsePositions[scoreRanking[i].Horse] = i + 1;
+                }
+            }
+            else
+            {
+                // Rounds 1-9: Use race position from this round
+                horsePositions = new Dictionary<string, int>
+                {
+                    ["Gryffindor"] = scores.IndexOf("Gryffindor") + 1,
+                    ["Hufflepuff"] = scores.IndexOf("Hufflepuff") + 1,
+                    ["Ravenclaw"] = scores.IndexOf("Ravenclaw") + 1,
+                    ["Slytherin"] = scores.IndexOf("Slytherin") + 1
+                };
+            }
+
+            foreach (var playerBets in session.PlayerBets.Values)
+            {
+                var bet = playerBets.FirstOrDefault(b => b.RoundNumber == roundNumber && b.Payout == 0);
+                if (bet != null && horsePositions.ContainsKey(bet.HorseName))
+                {
+                    var position = horsePositions[bet.HorseName];
+                    bet.Payout = session.CalculatePayout(bet.BetAmount, position, roundNumber);
                 }
             }
 
