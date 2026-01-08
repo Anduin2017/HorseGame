@@ -1,3 +1,4 @@
+#pragma warning disable CS0612
 #pragma warning disable
 using Gtk;
 using HorseGame.Shared;

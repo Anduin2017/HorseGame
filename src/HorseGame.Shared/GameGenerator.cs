@@ -1,3 +1,4 @@
+#pragma warning disable IDE0005
 #pragma warning disable
 ﻿using HorseGame.Shared;
 
@@ -71,6 +72,7 @@ namespace HorseGame.Shared
             var slytherinTime = evaluator.EvaluatorTime(level.SlytherinSpeeds);
 
             var speedUnique =
+#pragma warning disable CompareOfFloatsByEqualityOperator
                 gryffindorTime != hufflepuffTime &&
                 gryffindorTime != ravenclawTime &&
                 gryffindorTime != slytherinTime &&
@@ -78,6 +80,7 @@ namespace HorseGame.Shared
                 hufflepuffTime != slytherinTime &&
                 ravenclawTime != slytherinTime;
 
+#pragma warning restore CompareOfFloatsByEqualityOperator
             var speedsList = new[]
             {
                 gryffindorTime,

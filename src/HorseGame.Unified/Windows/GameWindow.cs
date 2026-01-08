@@ -1,3 +1,4 @@
+#pragma warning disable CS0612
 using Gtk;
 using HorseGame.Shared;
 using HorseGame.Unified.Components;
@@ -194,7 +195,7 @@ namespace HorseGame.Unified.Windows
 
         private void OnViewCluesRequested()
         {
-            new CluesWindow(presenter.Session);
+            _ = new CluesWindow(presenter.Session);
         }
 
         #endregion

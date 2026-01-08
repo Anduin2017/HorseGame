@@ -1,3 +1,4 @@
+#pragma warning disable CS0612
 #pragma warning disable
 using Gtk;
 using HorseGame.Shared;
@@ -9,8 +10,8 @@ namespace HorseGame.Unified.Components
     /// </summary>
     public class BettingHistoryPanel : VBox
     {
-        private TreeView bettingTreeView;
-        private ListStore bettingListStore;
+        private readonly TreeView bettingTreeView;
+        private readonly ListStore bettingListStore;
 
         public BettingHistoryPanel() : base(false, 10)
         {
@@ -76,7 +77,7 @@ namespace HorseGame.Unified.Components
                     }
                 }
 
-                bettingListStore.AppendValues(values.ToArray());
+                bettingListStore.AppendValues(values.Cast<object>().ToArray());
             }
         }
     }
