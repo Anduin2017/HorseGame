@@ -1,3 +1,4 @@
+#pragma warning disable
 using HorseGame.Shared;
 
 namespace HorseGame.Unified.Services

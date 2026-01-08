@@ -1,3 +1,4 @@
+#pragma warning disable
 using Gtk;
 
 namespace HorseGame.Unified.Components

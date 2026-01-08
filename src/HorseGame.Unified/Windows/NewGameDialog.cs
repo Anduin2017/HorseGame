@@ -1,3 +1,4 @@
+#pragma warning disable
 using Gtk;
 using HorseGame.Shared;
 using HorseGame.Unified.Services;
