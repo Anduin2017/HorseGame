@@ -1,7 +1,7 @@
 ﻿using HorseGame.Shared;
 using HorseGame.Shared.Clues;
 
-namespace HorseGame.ClueGenerator
+namespace HorseGame.Unified.Generators
 {
     public class PositioningGenerator : IClueGenerator
     {

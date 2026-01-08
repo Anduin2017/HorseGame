@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HorseGame.Shared.Clues
+#pragma warning disable IDE0005
+#pragma warning disable
+﻿namespace HorseGame.Shared.Clues
 {
     /// <summary>
     /// 马 A 会在第 N 轮跑出第 X 名的成绩。
@@ -12,10 +8,12 @@ namespace HorseGame.Shared.Clues
     public class Positioning : IClue
     {
         public string HorseName { get; set; } = string.Empty;
+
         /// <summary>
         /// Starts from 0.
         /// </summary>
         public int Level { get; set; }
+
         /// <summary>
         /// 1,2,3,4
         /// </summary>

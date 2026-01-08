@@ -1,6 +1,6 @@
-﻿using HorseGame.Shared;
-
-namespace HorseGame.Generator
+#pragma warning disable IDE0005
+#pragma warning disable
+﻿namespace HorseGame.Shared
 {
     public class GameGenerator
     {
@@ -12,6 +12,7 @@ namespace HorseGame.Generator
                 var level = this.BuildASuitableLevel();
                 game.Levels.Add(level);
             }
+
             return game;
         }
 
@@ -31,10 +32,14 @@ namespace HorseGame.Generator
         {
             var level = new Level();
             var randomSpeeds = GetRandomSpeeds();
-            level.GryffindorSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 0).Take(Consts.SpeedStagesEachLevel).ToList();
-            level.HufflepuffSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 1).Take(Consts.SpeedStagesEachLevel).ToList();
-            level.RavenclawSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 2).Take(Consts.SpeedStagesEachLevel).ToList();
-            level.SlytherinSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 3).Take(Consts.SpeedStagesEachLevel).ToList();
+            level.GryffindorSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 0)
+                .Take(Consts.SpeedStagesEachLevel).ToList();
+            level.HufflepuffSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 1)
+                .Take(Consts.SpeedStagesEachLevel).ToList();
+            level.RavenclawSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 2).Take(Consts.SpeedStagesEachLevel)
+                .ToList();
+            level.SlytherinSpeeds = randomSpeeds.Skip(Consts.SpeedStagesEachLevel * 3).Take(Consts.SpeedStagesEachLevel)
+                .ToList();
             return level;
         }
 
@@ -53,7 +58,7 @@ namespace HorseGame.Generator
 
             var random = new Random();
 
-            return speeds.OrderBy(t => random.Next()).ToList();
+            return speeds.OrderBy(_ => random.Next()).ToList();
         }
 
         public bool IsLevelSuitable(Level level)
@@ -64,7 +69,8 @@ namespace HorseGame.Generator
             var ravenclawTime = evaluator.EvaluatorTime(level.RavenclawSpeeds);
             var slytherinTime = evaluator.EvaluatorTime(level.SlytherinSpeeds);
 
-            var speedUnique = 
+            var speedUnique =
+#pragma warning disable CompareOfFloatsByEqualityOperator
                 gryffindorTime != hufflepuffTime &&
                 gryffindorTime != ravenclawTime &&
                 gryffindorTime != slytherinTime &&
@@ -72,7 +78,8 @@ namespace HorseGame.Generator
                 hufflepuffTime != slytherinTime &&
                 ravenclawTime != slytherinTime;
 
-            var speedsList = new double[]
+#pragma warning restore CompareOfFloatsByEqualityOperator
+            var speedsList = new[]
             {
                 gryffindorTime,
                 hufflepuffTime,

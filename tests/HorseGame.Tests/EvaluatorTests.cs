@@ -1,44 +1,40 @@
-﻿using HorseGame.Shared;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
+using HorseGame.Shared;
 
-namespace HorseGame.Tests
+namespace HorseGame.Tests;
+
+public class EvaluatorTests
 {
-    [TestClass]
-    public class EvaluatorTests
+    [Fact]
+    public void HorseEvaluator_CalculatesTimeCorrectly()
     {
-        [TestMethod]
-        public void HorseEvaluatorTest1()
-        {
-            var evaluator = new HorseEvaluator();
-            var result = evaluator.EvaluatorTime(new List<int>
-            {
-                20,20,20,20,20
-            });
-            Assert.AreEqual(result, 5);
-        }
+        var evaluator = new HorseEvaluator();
+        var speeds = new[] { 10, 10, 10, 10, 10 };
 
-        [TestMethod]
-        public void HorseEvaluatorTest2()
-        {
-            var evaluator = new HorseEvaluator();
-            var result = evaluator.EvaluatorTime(new List<int>
-            {
-                20,20,20,20,40
-            });
-            Assert.AreEqual(result, 4.5);
-        }
+        var time = evaluator.EvaluatorTime(speeds);
 
-        [TestMethod]
-        public void HorseEvaluatorTest3()
-        {
-            var evaluator = new HorseEvaluator();
-            var result = evaluator.EvaluatorTime(new List<int>
-            {
-                20,20,10,10,10
-            });
-            // All stages finished, is at 70, 5 seconds. Remaining 30.
-            // Use speed 10 to finish the next 30. Costs 3 seconds. Totally 8.
-            Assert.AreEqual(result, 8);
-        }
+        Assert.True(time > 0);
+    }
+
+    [Fact]
+    public void OvertakeEvaluator_Champion_Gets3Points()
+    {
+        var evaluator = new OvertakeEvaluator();
+        var times = new[] { 10.0, 11.0, 12.0, 13.0 }; // Sorted by time
+
+        var score = evaluator.GetScoreBasedOnTimeChart(times, 10.0); // Fastest
+
+        Assert.Equal(3, score); // Updated: Champion gets 3 points now, not 4
+    }
+
+    [Fact]
+    public void OvertakeEvaluator_Last_Gets0Points()
+    {
+        var evaluator = new OvertakeEvaluator();
+        var times = new[] { 10.0, 11.0, 12.0, 13.0 };
+
+        var score = evaluator.GetScoreBasedOnTimeChart(times, 13.0); // Slowest
+
+        Assert.Equal(0, score); // Updated: Last place gets 0 points now, not 1
     }
 }

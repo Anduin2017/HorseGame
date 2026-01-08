@@ -2,13 +2,16 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
-    <AssemblyName>HorseGame.Generator</AssemblyName>
-    <RootNamespace>HorseGame.Generator</RootNamespace>
+    <AssemblyName>HorseGame.Unified</AssemblyName>
+    <RootNamespace>HorseGame.Unified</RootNamespace>
     <IsTestProject>false</IsTestProject>
     <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="GtkSharp" Version="3.24.24.95" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HorseGame.Shared\HorseGame.Shared.csproj" />
   </ItemGroup>

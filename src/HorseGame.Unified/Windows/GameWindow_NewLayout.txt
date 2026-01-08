@@ -1,0 +1,42 @@
+// NEW LAYOUT STRUCTURE for GameWindow constructor
+// This is a reference document for the new layout implementation
+
+/*
+MAIN LAYOUT:
++---------------+---------------+
+| LEFT TOP      | RIGHT TOP     |
+| Players       | Round + Bet   |
+| Balance Table | Controls      |
++               +               +
+|               | Tracks        |
+| LEFT BOTTOM   | (expandable)  |
+| Betting       +---------------+
+| History       | RIGHT BOTTOM  |
+| (expandable)  | Results       |
++---------------+---------------+
+
+LEFT COLUMN (500px width):
+- TOP: Player Management + Balance (compact, ~250px)
+  - Add/Delete player buttons
+  - Player list: Name, Balance, Clues
+  - Buy Clue button
+  
+- BOTTOM: Betting History Table (expand with height)
+  - 10 rounds columns
+  - Shows all player bets
+
+RIGHT COLUMN (expand with width):
+- TOP: Round Controls + Betting Form (~200px)
+  - Current Round selector
+  - Play button
+  - Betting form (Player, Horse, Amount)
+  - Place Bet button
+  - View Clues button
+
+- MIDDLE: Race Tracks (fixed)
+  - 4 horse tracks with progress bars
+  
+- BOTTOM: Results (expand with remaining space)
+  - Trophy rankings
+  - Large formatted text
+*/

@@ -1,64 +1,70 @@
-﻿using HorseGame.Shared;
+﻿using Xunit;
+using HorseGame.Shared;
+using HorseGame.Unified.Generators;
 using HorseGame.Shared.Clues;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HorseGame.Tests
+namespace HorseGame.Tests;
+
+public class ClueGeneratorTests
 {
-    [TestClass]
-    public class ClueGeneratorTests
+    [Fact]
+    public void SuitableGameGenerator_Generates10Levels()
     {
-        [TestMethod]
-        public void TestNoCrash()
-        {
-            HorseGame.ClueGenerator.Program.Main(Array.Empty<string>());
-        }
+        var generator = new SuitableGameGenerator();
+        var game = generator.BuildSuitable();
 
-        [TestMethod]
-        public void TestClue()
-        {
-            var game = new Game();
+        Assert.Equal(10, game.Levels.Count);
+    }
 
-            // G,R,H,S
-            // 3,2,1,0
-            game.Levels.Add(new Level
-            {
-                GryffindorSpeeds = new List<int> { 20, 20, 20, 20 },
-                RavenclawSpeeds = new List<int> { 20, 20, 20, 10 },
-                HufflepuffSpeeds = new List<int> { 20, 20, 20, 7 },
-                SlytherinSpeeds = new List<int> { 20, 20, 20, 5 },
-            });
+    [Fact]
+    public void NotFirstGenerator_GeneratesCluesForNonWinners()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.BuildSuitable();
+        var clueGen = new NotFirstGenerator();
 
+        var clues = clueGen.GetClues(game).ToList();
 
-            // R+3 = 5
-            // S+2 = 2
-            // G+1 = 4
-            // H+0 = 1
+        Assert.Equal(30, clues.Count);
+        Assert.All(clues, c => Assert.IsType<NotFirst>(c));
+    }
 
-            game.Levels.Add(new Level
-            {
-                RavenclawSpeeds = new List<int> { 20, 20, 20, 20 },
-                SlytherinSpeeds = new List<int> { 20, 20, 20, 10 },
-                GryffindorSpeeds = new List<int> { 20, 20, 20, 7 },
-                HufflepuffSpeeds = new List<int> { 20, 20, 20, 5 },
-            });
+    [Fact]
+    public void TopTwoGenerator_GeneratesCluesForTop2()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.BuildSuitable();
+        var clueGen = new TopTwoGenerator();
 
-            // R,G,S,H
-            // 5,4,2,1
+        var clues = clueGen.GetClues(game).ToList();
 
-            // S takes H.
-            // R takes G.
+        Assert.Equal(20, clues.Count);
+        Assert.All(clues, c => Assert.IsType<TopTwo>(c));
+    }
 
-            var clues = HorseGame.ClueGenerator.Program.GetClues(game);
-            Assert.AreEqual((clues[0] as Faster)?.Fasterer, "Gryffindor");
-            Assert.AreEqual((clues[0] as Faster)?.Slower, "Ravenclaw");
+    [Fact]
+    public void TopThreeGenerator_GeneratesCluesForTop3()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.BuildSuitable();
+        var clueGen = new TopThreeGenerator();
 
-            Assert.AreEqual((clues[6] as Faster)?.Fasterer, "Ravenclaw");
-            Assert.AreEqual((clues[6] as Faster)?.Slower, "Slytherin");
-        }
+        var clues = clueGen.GetClues(game).ToList();
+
+        Assert.Equal(30, clues.Count);
+        Assert.All(clues, c => Assert.IsType<TopThree>(c));
+    }
+
+    [Fact]
+    public void ClueService_GeneratesRandomizedClues()
+    {
+        var generator = new SuitableGameGenerator();
+        var game = generator.BuildSuitable();
+        var service = new Unified.Services.ClueService();
+
+        var clues = service.GenerateClues(game);
+
+        Assert.NotEmpty(clues);
+        Assert.True(clues.Count > 50);
     }
 }

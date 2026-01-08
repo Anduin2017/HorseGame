@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HorseGame.Shared
+#pragma warning disable IDE0005
+#pragma warning disable
+﻿namespace HorseGame.Shared
 {
     public class HorseEvaluator
     {

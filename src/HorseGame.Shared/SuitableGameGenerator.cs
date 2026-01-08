@@ -1,6 +1,6 @@
-﻿using HorseGame.Shared;
-
-namespace HorseGame.Generator
+#pragma warning disable IDE0005
+#pragma warning disable
+﻿namespace HorseGame.Shared
 {
     public class SuitableGameGenerator
     {
@@ -48,7 +48,6 @@ namespace HorseGame.Generator
             int slytherinScore = 0;
             foreach (var level in game.Levels)
             {
-
                 var gryffindorTime = this.horseEvaluator.EvaluatorTime(level.GryffindorSpeeds);
                 var ravenclawTime = this.horseEvaluator.EvaluatorTime(level.RavenclawSpeeds);
                 var hufflepuffTime = this.horseEvaluator.EvaluatorTime(level.HufflepuffSpeeds);
@@ -68,13 +67,13 @@ namespace HorseGame.Generator
                 slytherinScore += this.overtakeEvaluator.GetScoreBasedOnTimeChart(scores, slytherinsTime);
             }
 
-            return 
-                gryffindorScore != ravenclawScore && 
-                gryffindorScore != hufflepuffScore && 
+            return
+                gryffindorScore != ravenclawScore &&
+                gryffindorScore != hufflepuffScore &&
                 gryffindorScore != slytherinScore &&
                 hufflepuffScore != ravenclawScore &&
                 hufflepuffScore != slytherinScore &&
-                ravenclawScore  != slytherinScore;
+                ravenclawScore != slytherinScore;
         }
     }
 }
