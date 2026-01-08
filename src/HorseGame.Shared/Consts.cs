@@ -1,6 +1,4 @@
 #pragma warning disable IDE0005
-using System;
-
 namespace HorseGame.Shared
 {
     public class Consts

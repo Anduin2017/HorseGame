@@ -1,8 +1,6 @@
 #pragma warning disable IDE0005
 #pragma warning disable
-﻿using HorseGame.Shared;
-
-namespace HorseGame.Shared.Clues
+﻿namespace HorseGame.Shared.Clues
 {
     /// <summary>
     /// 马 A 会总共取得 X 次 第 N 名。

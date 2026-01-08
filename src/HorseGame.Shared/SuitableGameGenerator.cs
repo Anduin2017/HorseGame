@@ -1,8 +1,6 @@
 #pragma warning disable IDE0005
 #pragma warning disable
-﻿using HorseGame.Shared;
-
-namespace HorseGame.Shared
+﻿namespace HorseGame.Shared
 {
     public class SuitableGameGenerator
     {

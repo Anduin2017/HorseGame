@@ -1,4 +1,4 @@
-#pragma warning disable CS0612
+
 #pragma warning disable
 using Gtk;
 using HorseGame.Shared;
@@ -10,7 +10,6 @@ namespace HorseGame.Unified.Components
     /// </summary>
     public class BettingHistoryPanel : VBox
     {
-        private readonly TreeView bettingTreeView;
         private readonly ListStore bettingListStore;
 
         public BettingHistoryPanel() : base(false, 10)
@@ -29,14 +28,14 @@ namespace HorseGame.Unified.Components
                 typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string)
             );
 
-            bettingTreeView = new TreeView(bettingListStore);
+            var bettingTreeView1 = new TreeView(bettingListStore);
 
             // Player column
             var playerCol = new TreeViewColumn { Title = "Player" };
             var playerCell = new CellRendererText();
             playerCol.PackStart(playerCell, true);
             playerCol.AddAttribute(playerCell, "text", 0);
-            bettingTreeView.AppendColumn(playerCol);
+            bettingTreeView1.AppendColumn(playerCol);
 
             // 10 round columns
             for (int i = 0; i < 10; i++)
@@ -45,10 +44,10 @@ namespace HorseGame.Unified.Components
                 var roundCell = new CellRendererText { WrapWidth = 70, WrapMode = Pango.WrapMode.Word };
                 roundCol.PackStart(roundCell, true);
                 roundCol.AddAttribute(roundCell, "text", i + 1);
-                bettingTreeView.AppendColumn(roundCol);
+                bettingTreeView1.AppendColumn(roundCol);
             }
 
-            scrolled.Add(bettingTreeView);
+            scrolled.Add(bettingTreeView1);
             PackStart(scrolled, true, true, 0); // Expand with window height
         }
 

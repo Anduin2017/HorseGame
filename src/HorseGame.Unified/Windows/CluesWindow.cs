@@ -35,7 +35,7 @@ namespace HorseGame.Unified.Windows
 
             // Close button
             var closeButton = new Button("Close");
-            closeButton.Clicked += (_,__) => this.Destroy();
+            closeButton.Clicked += (_,_) => this.Destroy();
             vbox.PackStart(closeButton, false, false, 0);
 
             Add(vbox);

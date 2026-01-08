@@ -1,8 +1,6 @@
 #pragma warning disable IDE0005
 #pragma warning disable
-﻿using System;
-
-namespace HorseGame.Shared.Clues
+﻿namespace HorseGame.Shared.Clues
 {
     /// <summary>
     /// 马 A 取得第 X 名的次数比马 B 多。

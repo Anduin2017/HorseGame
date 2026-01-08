@@ -1,8 +1,6 @@
 #pragma warning disable IDE0005
 #pragma warning disable
-﻿using HorseGame.Shared;
-
-namespace HorseGame.Shared
+﻿namespace HorseGame.Shared
 {
     public class GameGenerator
     {
@@ -60,7 +58,7 @@ namespace HorseGame.Shared
 
             var random = new Random();
 
-            return speeds.OrderBy(t => random.Next()).ToList();
+            return speeds.OrderBy(_ => random.Next()).ToList();
         }
 
         public bool IsLevelSuitable(Level level)

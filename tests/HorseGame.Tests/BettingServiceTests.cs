@@ -1,7 +1,6 @@
 #pragma warning disable IDE0005
 #pragma warning disable
 using Xunit;
-using HorseGame.Shared;
 using HorseGame.Unified.Services;
 
 namespace HorseGame.Tests;

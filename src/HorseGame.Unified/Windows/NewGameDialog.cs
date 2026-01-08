@@ -28,7 +28,7 @@ namespace HorseGame.Unified.Windows
 
             gameNameEntry = new Entry();
             gameNameEntry.Text = $"Game {DateTime.Now:yyyy-MM-dd HH:mm}";
-            gameNameEntry.Activated += (_,__) => OnGenerate();
+            gameNameEntry.Activated += (_,_) => OnGenerate();
             contentArea.PackStart(gameNameEntry, false, false, 0);
 
             AddButton("Cancel", ResponseType.Cancel);

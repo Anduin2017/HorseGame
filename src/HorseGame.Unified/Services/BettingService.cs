@@ -1,7 +1,5 @@
 #pragma warning disable IDE0005
 #pragma warning disable
-using HorseGame.Shared;
-
 namespace HorseGame.Unified.Services
 {
     /// <summary>

@@ -33,12 +33,12 @@ namespace HorseGame.Unified.Components
 
             // Play button
             playButton = new Button("▶ Play Race");
-            playButton.Clicked += (_,__) => PlayRequested?.Invoke();
+            playButton.Clicked += (_,_) => PlayRequested?.Invoke();
             PackStart(playButton, false, false, 0);
 
             // View Clues button
             var viewCluesButton = new Button("📋 View Clues");
-            viewCluesButton.Clicked += (_ ,__) => ViewCluesRequested?.Invoke();
+            viewCluesButton.Clicked += (_ ,_) => ViewCluesRequested?.Invoke();
             PackEnd(viewCluesButton, false, false, 0);
         }
 

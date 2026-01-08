@@ -1,4 +1,5 @@
-#pragma warning disable CS0612
+#pragma warning disable CS0612 // Type or member is obsolete
+
 using Gtk;
 using HorseGame.Shared;
 

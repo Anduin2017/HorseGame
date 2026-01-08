@@ -1,6 +1,5 @@
 #pragma warning disable IDE0005
 #pragma warning disable
-using System.IO;
 using System.Text.Json;
 using HorseGame.Shared;
 

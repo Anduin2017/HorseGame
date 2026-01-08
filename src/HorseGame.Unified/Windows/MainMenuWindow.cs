@@ -1,7 +1,6 @@
-#pragma warning disable CS0612
+
 #pragma warning disable
 using Gtk;
-using HorseGame.Shared;
 using HorseGame.Unified.Services;
 
 namespace HorseGame.Unified.Windows
@@ -18,7 +17,7 @@ namespace HorseGame.Unified.Windows
 
             SetDefaultSize(800, 600);
             SetPosition(WindowPosition.Center);
-            DeleteEvent += (_,__) => Application.Quit();
+            DeleteEvent += (_,_) => Application.Quit();
 
             var vbox = new VBox(false, 10);
             vbox.BorderWidth = 10;
